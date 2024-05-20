@@ -23,12 +23,14 @@ import com.pratikshekhar.myproject.freshfusion.ui.theme.Typography
 @Preview
 @Composable
 private  fun Preview(){
-    PhoneNumberInput(LoginViewModel())
+    PhoneNumberInput(viewModel = LoginViewModel())
 }
 @Composable
-  fun PhoneNumberInput(viewModel: LoginViewModel){
+  fun PhoneNumberInput(modifier: Modifier=Modifier,viewModel: LoginViewModel){
 
-    Row(verticalAlignment = Alignment.CenterVertically){
+    Row(
+        modifier,
+        verticalAlignment = Alignment.CenterVertically){
         Text("+91", style = Typography.titleLarge.copy(if (viewModel.states.placeholderVisible)  LightGrey else Dark))
 
         InnerInput(value = viewModel.states.phoneNumber, updateValue = {

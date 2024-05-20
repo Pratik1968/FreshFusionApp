@@ -25,9 +25,9 @@ private  fun Preview(){
     LoginContainerColumnWithLogoTitleAndDescription(title = "Enter your mobile number", description ="We will send you a verification code" )
 }
 @Composable
-fun LoginContainerColumnWithLogoTitleAndDescription(title:String,description:String){
+fun LoginContainerColumnWithLogoTitleAndDescription(modifier: Modifier=Modifier,title:String,description:String){
     Column(
-        Modifier.fillMaxWidth().padding(horizontal = ContentPaddingHorizontal),
+        modifier.fillMaxWidth().padding(horizontal = ContentPaddingHorizontal),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {

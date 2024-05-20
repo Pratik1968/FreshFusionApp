@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 
 }
 
@@ -55,6 +56,7 @@ android {
 dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.firebase.auth)
     kapt(libs.hilt.android.compiler)
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "333516026973",
+    "project_id": "supportserver-92473",
+    "storage_bucket": "supportserver-92473.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333516026973:android:8ec75478bdbf60f68909b4",
+        "android_client_info": {
+          "package_name": "com.pratikshekhar.myproject.freshfusion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBI8H-F1M5zYcHO5WS0eV--W-xIetdAu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
