@@ -23,20 +23,28 @@ android {
             useSupportLibrary = true
         }
     }
-
+    android.buildFeatures.buildConfig= true
     buildTypes {
         release {
+        flavorDimensions+="default";
+           debug {
+buildConfigField("String","SERVER_URL","\"http://localhost:3000\"");
+           }
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -54,12 +62,19 @@ android {
 }
 
 dependencies {
-    implementation(libs.hilt.android)
+    implementation(libs.androidx.datastore.preferences)
+
+    // optional - RxJava2 support
+    implementation(libs.androidx.datastore.preferences.rxjava2)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.auth)
-    kapt(libs.hilt.android.compiler)
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
+    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

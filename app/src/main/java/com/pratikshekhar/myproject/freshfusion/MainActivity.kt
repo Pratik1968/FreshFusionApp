@@ -17,19 +17,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.pratikshekhar.myproject.freshfusion.ui.screens.Home.Composables.HomeScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.Intro.IntroScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.Login.Composables.LoginScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.OtpVerification.Composables.OtpVerificationScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.PostAddressScreen.Composables.PostAddressScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.PostNameScreen.Composables.PostNameScreen
-import com.pratikshekhar.myproject.freshfusion.ui.screens.Splash.SplashScreen
-import com.pratikshekhar.myproject.freshfusion.ui.theme.FreshFusionTheme
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.intro.IntroScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.login.LoginScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.main.MainScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.otpVerification.OtpVerificationScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.postAddressScreen.PostAddressScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.postNameScreen.PostNameScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.screens.splash.SplashScreen
+import com.pratikshekhar.myproject.freshfusion.presentation.theme.FreshFusionTheme
 import com.pratikshekhar.myproject.freshfusion.util.NavDestination
 import dagger.hilt.android.AndroidEntryPoint
+
 @SuppressLint("CompositionLocalNaming")
 val ProjectNavigationController = compositionLocalOf<NavHostController> { error("LocalNavigationController not found") }
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +55,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationSetting()
 {
+
     val navController = rememberNavController()
+    val userIsLogin = Firebase.auth.currentUser
+
    CompositionLocalProvider(ProjectNavigationController provides  navController) {
         NavHost(navController = navController, startDestination = NavDestination.SPLASH_SCREEN) {
 
@@ -73,11 +78,15 @@ IntroScreen()
                 ){
 OtpVerificationScreen(it.arguments?.getString("arg"))
             }
-            composable(NavDestination.HOME_SCREEN){
-HomeScreen()
+            composable(NavDestination.MAIN_SCREEN){
+MainScreen()
             }
-            composable(NavDestination.POST_ADDRESS){
-            PostAddressScreen()
+            composable(NavDestination.POST_ADDRESS+"/{name}",
+                arguments = listOf(
+                    navArgument("name"){type = NavType.StringType}
+                )
+                ){
+            PostAddressScreen(it.arguments?.getString("name"))
             }
             composable(NavDestination.POST_NAME){
                 PostNameScreen( )
